@@ -1,3 +1,5 @@
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
 /*
 Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at https://polymer.github.io/LICENSE.txt
@@ -11,42 +13,33 @@ Dynamically loads the Google Drive Realtime API, firing the `api-load` event whe
 
 Any number of components can use `<google-realtime-api>` elements, and the library will only be loaded once.
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
-import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 Polymer({
 
   is: 'google-realtime-api',
 
   behaviors: [
-    IronJsonpLibraryBehavior
+    IronJsonpLibraryBehavior,
   ],
 
   properties: {
 
     /** @private */
-    libraryUrl:  {
+    libraryUrl: {
       type: String,
-      value: 'https://apis.google.com/js/drive-realtime.js?onload=%%callback%%'
+      value: 'https://apis.google.com/js/drive-realtime.js?onload=%%callback%%',
     },
 
-     /**
+    /**
      * Fired when the API library is loaded and available.
      * @event api-load
      */
     /**
      * Name of event fired when library is loaded and available.
      */
-    notifyEvent:  {
+    notifyEvent: {
       type: String,
-      value: 'api-load'
-    }
+      value: 'api-load',
+    },
 
   },
 
@@ -55,6 +48,6 @@ Polymer({
    */
   get api() {
     return gapi.drive.realtime;
-  }
+  },
 
 });

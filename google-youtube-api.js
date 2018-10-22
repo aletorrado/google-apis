@@ -1,3 +1,5 @@
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
 /*
 Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at https://polymer.github.io/LICENSE.txt
@@ -13,29 +15,20 @@ Any number of components can use `<google-youtube-api>` elements, and the librar
 
 https://developers.google.com/youtube/iframe_api_reference
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
-import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 Polymer({
 
   is: 'google-youtube-api',
 
   behaviors: [
-    IronJsonpLibraryBehavior
+    IronJsonpLibraryBehavior,
   ],
 
   properties: {
 
     /** @private */
-    libraryUrl:  {
+    libraryUrl: {
       type: String,
-      value: 'https://www.youtube.com/iframe_api'
+      value: 'https://www.youtube.com/iframe_api',
     },
 
     /**
@@ -45,20 +38,20 @@ Polymer({
     /**
      * Name of event fired when library loads.
      */
-    notifyEvent:  {
+    notifyEvent: {
       type: String,
-      value: 'api-load'
+      value: 'api-load',
     },
 
-    callbackName:  {
+    callbackName: {
       type: String,
-      value: 'onYouTubeIframeAPIReady'
-    }
+      value: 'onYouTubeIframeAPIReady',
+    },
 
   },
 
   get api() {
     return YT;
-  }
+  },
 
 });

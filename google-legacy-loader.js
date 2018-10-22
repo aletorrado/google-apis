@@ -1,3 +1,5 @@
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
 /*
 Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at https://polymer.github.io/LICENSE.txt
@@ -11,21 +13,12 @@ Dynamically loads the legacy Google JavaScript API Loader (https://developers.go
 
 Fires `api-load` event when ready.
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
-import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 Polymer({
 
   is: 'google-legacy-loader',
 
   behaviors: [
-    IronJsonpLibraryBehavior
+    IronJsonpLibraryBehavior,
   ],
 
   properties: {
@@ -33,7 +26,7 @@ Polymer({
     /** @private */
     libraryUrl: {
       type: String,
-      value: 'https://www.google.com/jsapi?callback=%%callback%%'
+      value: 'https://www.google.com/jsapi?callback=%%callback%%',
     },
 
     /**
@@ -45,8 +38,8 @@ Polymer({
      */
     notifyEvent: {
       type: String,
-      value: 'api-load'
-    }
+      value: 'api-load',
+    },
   },
 
   /**
@@ -54,5 +47,5 @@ Polymer({
    */
   get api() {
     return google;
-  }
+  },
 });

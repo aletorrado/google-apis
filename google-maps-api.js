@@ -1,3 +1,6 @@
+import '@polymer/iron-jsonp-library/iron-jsonp-library.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
 /*
 Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at https://polymer.github.io/LICENSE.txt
@@ -23,21 +26,12 @@ Any number of components can use `<google-maps-api>` elements, and the library w
 
 @summary Element wrapper around Google Maps API.
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
-import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 Polymer({
 
   is: 'google-maps-api',
 
   behaviors: [
-    IronJsonpLibraryBehavior
+    IronJsonpLibraryBehavior,
   ],
 
   properties: {
@@ -45,7 +39,7 @@ Polymer({
     /** @private */
     mapsUrl: {
       type: String,
-      value: 'https://maps.googleapis.com/maps/api/js?callback=%%callback%%'
+      value: 'https://maps.googleapis.com/maps/api/js?callback=%%callback%%',
     },
 
     /**
@@ -53,7 +47,7 @@ Polymer({
      */
     apiKey: {
       type: String,
-      value: ''
+      value: '',
     },
 
     /**
@@ -62,7 +56,7 @@ Polymer({
      */
     clientId: {
       type: String,
-      value: ''
+      value: '',
     },
 
     /**
@@ -70,7 +64,7 @@ Polymer({
      */
     version: {
       type: String,
-      value: '3.exp'
+      value: '3.exp',
     },
 
     /**
@@ -82,7 +76,7 @@ Polymer({
      */
     language: {
       type: String,
-      value: ''
+      value: '',
     },
     /**
      * If true, sign-in is enabled.
@@ -90,7 +84,7 @@ Polymer({
      */
     signedIn: {
       type: Boolean,
-      value: false
+      value: false,
     },
 
     /**
@@ -102,44 +96,44 @@ Polymer({
      */
     notifyEvent: {
       type: String,
-      value: 'api-load'
+      value: 'api-load',
     },
 
     /** @private */
     libraryUrl: {
       type: String,
-      computed: '_computeUrl(mapsUrl, version, apiKey, clientId, language, signedIn)'
-    }
+      computed: '_computeUrl(mapsUrl, version, apiKey, clientId, language, signedIn)',
+    },
   },
 
-  _computeUrl: function(mapsUrl, version, apiKey, clientId, language, signedIn) {
-    var url = mapsUrl + '&v=' + version;
+  _computeUrl(mapsUrl, version, apiKey, clientId, language, signedIn) {
+    let url = `${mapsUrl}&v=${version}`;
 
     // Always load all Maps API libraries.
     url += '&libraries=drawing,geometry,places,visualization';
 
     if (apiKey && !clientId) {
-      url += '&key=' + apiKey;
+      url += `&key=${apiKey}`;
     }
 
     if (clientId) {
-      url += '&client=' + clientId;
+      url += `&client=${clientId}`;
     }
 
     // Log a warning if the user is not using an API Key or Client ID.
     if (!apiKey && !clientId) {
-      var warning = 'No Google Maps API Key or Client ID specified. ' +
+      const warning = 'No Google Maps API Key or Client ID specified. ' +
           'See https://developers.google.com/maps/documentation/javascript/get-api-key ' +
           'for instructions to get started with a key or client id.';
       console.warn(warning);
     }
 
     if (language) {
-      url += '&language=' + language;
+      url += `&language=${language}`;
     }
 
     if (signedIn) {
-      url += '&signed_in=' + signedIn;
+      url += `&signed_in=${signedIn}`;
     }
     return url;
   },
@@ -149,5 +143,5 @@ Polymer({
    */
   get api() {
     return google.maps;
-  }
+  },
 });

@@ -1,3 +1,5 @@
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
 /*
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at https://polymer.github.io/LICENSE.txt
@@ -21,21 +23,12 @@ Any number of components can use `<google-js-api>` elements, and the library wil
       });
     </script>
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
-import { IronJsonpLibraryBehavior } from '@polymer/iron-jsonp-library/iron-jsonp-library.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 Polymer({
 
   is: 'google-js-api',
 
   behaviors: [
-    IronJsonpLibraryBehavior
+    IronJsonpLibraryBehavior,
   ],
 
   properties: {
@@ -43,7 +36,7 @@ Polymer({
     /** @private */
     libraryUrl: {
       type: String,
-      value: 'https://apis.google.com/js/api.js?onload=%%callback%%'
+      value: 'https://apis.google.com/js/api.js?onload=%%callback%%',
     },
 
     /**
@@ -55,12 +48,12 @@ Polymer({
      */
     notifyEvent: {
       type: String,
-      value: 'js-api-load'
+      value: 'js-api-load',
     },
   },
 
   get api() {
     return gapi;
-  }
+  },
 
 });
